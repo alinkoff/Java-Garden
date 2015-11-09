@@ -1,0 +1,120 @@
+//Imports are listed in full to show what's being used
+//could just import javax.swing.* and java.awt.* etc..
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+
+
+public class GridBagLayoutExample {
+    JFrame guiFrame;
+
+
+    public static void main(String[] args) {
+     
+         //Use the event dispatch thread for Swing components
+         EventQueue.invokeLater(new Runnable()
+         {
+             
+            @Override
+             public void run()
+             {
+                 
+                 new GridBagLayoutExample();         
+             }
+         });
+              
+    }
+    
+    public GridBagLayoutExample()
+    { 
+        guiFrame = new JFrame();
+        
+        //make sure the program exits when the frame closes
+        guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        guiFrame.setTitle("GridBagLayout Example");
+        guiFrame.setSize(1000,700);
+      
+        //This will center the JFrame in the middle of the screen
+        guiFrame.setLocationRelativeTo(null);
+        
+        //creating a border to highlight the component areas
+        Border outline = BorderFactory.createLineBorder(Color.black);
+        
+        //create GribBagLayout and the GridBagLayout Constraints
+        GridBagLayout gridBag = new GridBagLayout();
+        GridBagConstraints cons = new GridBagConstraints();
+        
+        cons.fill = GridBagConstraints.BOTH;
+        
+        JPanel compPanel = new JPanel();
+        compPanel.setLayout(gridBag);
+        
+        
+        //Use the GridBagConstraints to determine how the component
+        //is displayed within the GridBagLayout. ipadx and ipady are used
+        //to pad the component within the cell(s). The weightx and weighty
+        //are used to give a weighting to the component to specify how the
+        //any extra space is handled by a row or column. gridx and gridy are
+        //the position coordinates for the component within the grid. fill 
+        //determines what happens to sizing of a component if it doesn't completely
+        //fill its cell. gridwidth and gridheight specify how many cells (either 
+        //in a row or column) the component will take up.
+
+        String[] Vegetables = { "Tomatoes", "Watermelons", "Beets", "Spinach", "Carrots",
+        		"Onions", "Broccoli", "Giant Pumpkins", "Radishes", "Potatoes", "Green Peas",
+        		"Eggplant", "Garlic", "Peppers", "Sweet Corn", "Sweet Potatoes", "Leeks",
+        		"Cauliflower", "Beans", "Okra"};
+		// Create the combo box
+        cons.gridx = 0;
+        cons.gridy = 0;
+		JComboBox VegetablesList = new JComboBox(Vegetables);
+		compPanel.add(VegetablesList);
+               
+		//create label to hold IMG
+        cons.ipady = 50;
+        cons.ipadx = 200;
+        cons.weightx = 0;
+        cons.gridx = 0;
+        cons.gridy = 1;
+        JLabel IMG = new JLabel("Empty Spaxce for IMG");
+        gridBag.setConstraints(IMG, cons);
+        compPanel.add(IMG);
+        
+        //tabbed pane
+        cons.ipady = 100;
+        cons.ipadx = 10;
+        cons.gridx = 0;
+        cons.gridy = 2;
+        JTabbedPane tabbedPane = new JTabbedPane();
+        JPanel jp1 = new JPanel();
+        JPanel jp2 = new JPanel();
+      //This creates a non-editable label, sets what the label will read
+      //and adds the label to the first tab
+      JLabel label1 = new JLabel();
+      label1.setText("This is Tab 1");
+      jp1.add(label1);
+    //This adds the first and second tab to our tabbed pane object and names it
+      tabbedPane.addTab("Tab1", jp1);
+      
+      tabbedPane.addTab("Tab2", jp2);
+        gridBag.setConstraints(tabbedPane, cons);
+        compPanel.add(tabbedPane);
+        
+        
+        
+        cons.weightx = 0;
+        cons.gridx = 1;
+        cons.gridy = 4;
+        JButton credits = new JButton("Credits");
+        gridBag.setConstraints(credits, cons);
+        compPanel.add(credits);
+
+
+        guiFrame.add(compPanel);
+        guiFrame.setVisible(true);
+        
+    }
+    
+}
