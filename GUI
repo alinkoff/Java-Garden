@@ -68,24 +68,25 @@ public class GridBagLayoutExample {
         		"Cauliflower", "Beans", "Okra"};
 		// Create the combo box
         cons.gridx = 0;
-        cons.gridy = 0;
+        cons.ipady = 10;
+        cons.ipadx = 10;
 		JComboBox VegetablesList = new JComboBox(Vegetables);
-		compPanel.add(VegetablesList);
+		compPanel.add(VegetablesList, cons);
                
 		//create label to hold IMG
         cons.ipady = 50;
-        cons.ipadx = 200;
+        cons.ipadx = 500;
         cons.weightx = 0;
-        cons.gridx = 0;
+        cons.gridx = 1;
         cons.gridy = 1;
-        JLabel IMG = new JLabel("Empty Spaxce for IMG");
+        JLabel IMG = new JLabel("Empty Space for IMG");
         gridBag.setConstraints(IMG, cons);
         compPanel.add(IMG);
         
         //tabbed pane
         cons.ipady = 100;
         cons.ipadx = 10;
-        cons.gridx = 0;
+        cons.gridx = 1;
         cons.gridy = 2;
         JTabbedPane tabbedPane = new JTabbedPane();
         JPanel jp1 = new JPanel();
